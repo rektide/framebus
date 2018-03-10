@@ -1,5 +1,5 @@
 {
-  "name": "framebus",
+  "name": "framebus-esm",
   "description": "Framebus allows you to easily send messages across frames (and iframes) with a simple bus.",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   "version": "2.0.8",
   "main": "dist/framebus.js",
   "browser": "dist/framebus.js",
+  "module": "src/framebus.js",
   "files": [
     "dist/framebus.js",
     "dist/framebus.min.js"
@@ -16,6 +17,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint && xvfb-run -a --server-num=99 gulp test",
+    "build": "gulp",
     "start": "./bin/www"
   },
   "license": "MIT",
