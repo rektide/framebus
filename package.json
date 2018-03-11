@@ -6,14 +6,12 @@
     "url": "git@github.com:braintree/framebus"
   },
   "homepage": "https://github.com/braintree/framebus",
-  "version": "2.0.10",
-  "main": "dist/framebus.js",
-  "browser": "dist/framebus.js",
-  "module": "src/framebus.js",
+  "version": "2.0.11",
+  "main": "lib/framebus.js",
+  "module": "lib/framebus.js",
+  "esmodule": true,
   "files": [
-    "src/framebus.js",
-    "dist/framebus.js",
-    "dist/framebus.min.js"
+    "lib/framebus.js"
   ],
   "scripts": {
     "lint": "eslint .",
