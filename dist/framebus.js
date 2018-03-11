@@ -1,13 +1,3 @@
-'use strict';
-(function (root, factory) {
-  if (typeof exports === 'object' && typeof module !== 'undefined') {
-    module.exports = factory(typeof global === 'undefined' ? root : global);
-  } else if (typeof define === 'function' && define.amd) {
-    define([], function () { return factory(root); });
-  } else {
-    root.framebus = factory(root);
-  }
-})(this, function (root) { // eslint-disable-line no-invalid-this
   var win, framebus;
   var popups = [];
   var subscribers = {};
@@ -161,6 +151,24 @@
     }
   }
 
+  // removeIf(production)
+  function _detach() {
+    if (win == null) { return; }
+
+    if (win.removeEventListener) {
+      win.removeEventListener('message', _onmessage, false);
+    } else if (win.detachEvent) {
+      win.detachEvent('onmessage', _onmessage);
+    } else if (win.onmessage === _onmessage) {
+      win.onmessage = null;
+    }
+
+    win = null;
+    popups = [];
+    subscribers = {};
+  }
+  // endRemoveIf(production)
+
   function _uuid() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
       var r = Math.random() * 16 | 0;
@@ -255,8 +263,22 @@
 
   _attach();
 
-  framebus = {
+  export {
     target: target,
+    // removeIf(production)
+    _packagePayload: _packagePayload,
+    _unpackPayload: _unpackPayload,
+    _attach: _attach,
+    _detach: _detach,
+    _dispatch: _dispatch,
+    _broadcast: _broadcast,
+    _subscribeReplier: _subscribeReplier,
+    _subscriptionArgsInvalid: _subscriptionArgsInvalid,
+    _onmessage: _onmessage,
+    _uuid: _uuid,
+    _getSubscribers: function () { return subscribers; },
+    _win: function () { return win; },
+    // endRemoveIf(production)
     include: include,
     publish: publish,
     pub: publish,
@@ -269,6 +291,3 @@
     unsub: unsubscribe,
     off: unsubscribe
   };
-
-  return framebus;
-});
