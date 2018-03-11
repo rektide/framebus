@@ -6,18 +6,18 @@
     "url": "git@github.com:braintree/framebus"
   },
   "homepage": "https://github.com/braintree/framebus",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "main": "dist/framebus.js",
   "browser": "dist/framebus.js",
   "module": "src/framebus.js",
   "files": [
+    "src/framebus.js",
     "dist/framebus.js",
     "dist/framebus.min.js"
   ],
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint && xvfb-run -a --server-num=99 gulp test",
-    "build": "gulp",
     "start": "./bin/www"
   },
   "license": "MIT",
